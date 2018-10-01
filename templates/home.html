@@ -6,10 +6,6 @@
 
 <h1>movies</h1>
 
-{% for m in movies %}
-  <p>
-    <a href="{{ url_for('movie', movie_id=m.movie_id) }}">{{ m.title }} ({{ m.release_year }})</a>
-  </p>
-{% endfor %}
+(TODO show a list of movies)
 
 {% endblock %}

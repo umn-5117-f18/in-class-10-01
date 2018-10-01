@@ -11,25 +11,20 @@ app = Flask(__name__)
 def initialize():
     db.setup()
 
-@app.errorhandler(404)
-def page_not_found(error):
-    return render_template("404.html"), 404
-
 @app.route('/')
 def home():
     with db.get_db_cursor() as cur:
-        cur.execute("SELECT * FROM movie")
-        movies = [record for record in cur]
+        # TODO
+        movies = None
     return render_template("home.html", movies=movies)
 
 @app.route('/movies/<movie_id>')
 def movie(movie_id):
     with db.get_db_cursor() as cur:
-        cur.execute("SELECT * FROM movie where movie_id=%s", (movie_id,))
-        movie = cur.fetchone()
+        # TODO
+        movie = None
 
-    if not movie:
-        return abort(404)
+    # TODO 404 if not found
 
     return render_template("movie.html", movie=movie)
 
@@ -44,14 +39,11 @@ def genre(genre):
 def search():
     query = request.args.get('query')
     if not query:
-        # TODO flash
         redirect('home')
 
     with db.get_db_cursor() as cur:
-        # XXX: hack for query wildcard characters w/ correct escaping
-        query_wildcard = f"%{query}%"
-        cur.execute("SELECT * FROM movie where title ilike (%s)", (query_wildcard,))
-        movies = [record for record in cur]
+        # TODO like query
+        movies = None
     return render_template("home.html", movies=movies)
 
 

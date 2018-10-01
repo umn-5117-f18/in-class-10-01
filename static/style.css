@@ -1,7 +1,13 @@
 body #menu {
   padding: 20px;
   border-bottom: 1px solid black;
-  /* background-color: pink; */
+}
+
+#search-box {
+  display: inline-block;
+  position: absolute;
+  top: 5px;
+  right: 30px;
 }
 
 #content {

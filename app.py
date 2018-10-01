@@ -40,6 +40,20 @@ def genre(genre):
         movies = [record for record in cur]
     return render_template("home.html", movies=movies)
 
+@app.route('/search')
+def search():
+    query = request.args.get('query')
+    if not query:
+        # TODO flash
+        redirect('home')
+
+    with db.get_db_cursor() as cur:
+        # XXX: hack for query wildcard characters w/ correct escaping
+        query_wildcard = f"%{query}%"
+        cur.execute("SELECT * FROM movie where title ilike (%s)", (query_wildcard,))
+        movies = [record for record in cur]
+    return render_template("home.html", movies=movies)
+
 
 if __name__ == '__main__':
     pass

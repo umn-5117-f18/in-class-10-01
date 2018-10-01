@@ -12,7 +12,7 @@ heroku setup:
 ```
 heroku create
 heroku addons:create heroku-postgresql:hobby-dev
-# use `heroku pg:psql` and run `schema.sql`
+# use `heroku pg:psql` and run `\i 'schema.sql'`
 git push heroku master
 heroku open
 ```
@@ -33,6 +33,5 @@ heroku commands:
 
 ```
 heroku logs --tail
-heroku pg
 heroku pg:psql
 ```

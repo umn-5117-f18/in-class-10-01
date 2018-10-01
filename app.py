@@ -13,8 +13,6 @@ def initialize():
 
 @app.route('/')
 def home():
-    link = url_for("people")
-    # return f'Hello World! <a href="{link}">people</a>'
     return render_template("home.html", link=link)
 
 

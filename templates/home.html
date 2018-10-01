@@ -1,18 +1,15 @@
 {% extends "base.html" %}
+
 {% block title %}home{% endblock %}
 
 {% block content %}
 
-<form class="pure-form pure-form-stacked" method="post" action="/people">
-    <fieldset>
-        <legend>A form to add a person to the database.</legend>
+<h1>movies</h1>
 
-        <label for="person">New Person's Name</label>
-        <input id="name-input" name="name" type="text" placeholder="New Name" required minlength="3">
-
-        <button type="submit" class="pure-button pure-button-primary">Add</button>
-    </fieldset>
-</form>
-
+{% for m in movies %}
+  <p>
+    <a href="{{ url_for('movie', movie_id=m.movie_id) }}">{{ m.title }} ({{ m.release_year }})</a>
+  </p>
+{% endfor %}
 
 {% endblock %}

@@ -13,37 +13,17 @@ def initialize():
 
 @app.route('/')
 def home():
-    return render_template("home.html", link=link)
+    with db.get_db_cursor() as cur:
+        cur.execute("SELECT * FROM movie")
+        movies = [record for record in cur]
+    return render_template("home.html", movies=movies)
 
-
-@app.route('/people', methods=['GET', 'POST'])
-def people():
-    if request.method == 'POST':
-        name = request.form['name']
-        app.logger.info(f"got a name: {name}")
-        with db.get_db_cursor(commit=True) as cur:
-            cur.execute("insert into person (name) values (%s)", (name,))
-        return redirect(url_for("people"))
-    else:
-        with db.get_db_cursor() as cur:
-            cur.execute("SELECT * FROM person;")
-            names = [record["name"] for record in cur]
-
-        return render_template("people.html", names=names)
-
-
-@app.route('/api/foo')
-def api_foo():
-    data = {
-        "message": "hello, world",
-        "isAGoodExample": False,
-        "aList": [1, 2, 3],
-        "nested": {
-            "key": "value"
-        }
-    }
-    return jsonify(data)
-
+@app.route('/movies/<movie_id>')
+def movie(movie_id):
+    with db.get_db_cursor() as cur:
+        cur.execute("SELECT * FROM movie where movie_id=%s", (movie_id,))
+        movie = cur.fetchone()
+    return render_template("movie.html", movie=movie)
 
 if __name__ == '__main__':
     pass

@@ -4,7 +4,7 @@ starting point: <https://github.com/umn-5117-f18/in-class-10-01>
 
 docs:
 
-* 
+*
 
 
 heroku setup:
@@ -22,7 +22,6 @@ local setup:
 ```
 # setup
 pipenv install
-# add
 # create .env with datastore connection params (see .env.example)
 
 # run

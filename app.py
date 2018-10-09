@@ -44,8 +44,7 @@ def genre(genre):
 def search():
     query = request.args.get('query')
     if not query:
-        # TODO flash
-        redirect('home')
+        return redirect(url_for("home"))
 
     with db.get_db_cursor() as cur:
         # XXX: hack for query wildcard characters w/ correct escaping
